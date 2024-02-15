@@ -57,9 +57,15 @@ export default function Signup() {
     marginLeft: 65,
     fontFamily: 'Inconsolata',
   }
+  let myStyle3 = {
+    marginTop: 10,
+    fontSize:13,
+    width: 350,
+    fontFamily: 'calibri'
+  }
   return (
     <>
-      <div className='container mt-5 text-bg-dark p-3' style={{ width: 500, height: 600, borderRadius: 10 }}>
+      <div className='container mt-5 text-bg-dark p-3' style={{ width: 500, height: 660, borderRadius: 10 }}>
         <p className="bgimg mb-5" style={{ marginLeft: 170, fontSize: 35, fontFamily: 'Hubballi' }}>Signup</p>
         {/* <img src="D:\Car-parking project\car-parking\src\Components\parking.jpg" alt="" class="bg-image"/> */}
         <form onSubmit={handleSubmit}>
@@ -110,10 +116,14 @@ export default function Signup() {
               onChange={handleInput}
               id="exampleInputPassword1"
               name='password' />
+              <div style={myStyle3}>
+                Must contain 8+ characters, including atleast 1 capital letter,1 small letter, 1 digit and 1 special character
+              </div>
           </div>
-
+          
           <button type="submit" className="btn btn-outline-success mt-2" style={{ marginLeft: 65, fontFamily: 'Inconsolata', borderRadius: 50, width: 350 }}>
-          <Link to="/" style={{textDecoration:'none', color:'white'}}>Signup</Link>
+          {/* <Link to="/" style={{textDecoration:'none', color:'white'}}>Signup</Link> */}
+          signup
           </button>
         </form>
       </div>
