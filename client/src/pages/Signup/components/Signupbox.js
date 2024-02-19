@@ -1,7 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
 import { Link } from "react-router-dom";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function Signup() {
+  const notify = (data) => toast.warn(data);
   const [user, setUser] = useState({
     name: "",
     rollnumber: "",
@@ -41,7 +46,13 @@ export default function Signup() {
         setUser({ name: "", rollnumber: "", hostelname: "", password: "" });
         console.log(responseData);
       } else {
-        console.log("error inside response ");
+        const errorData = await response.json();
+        
+        
+        console.log("error response: ",errorData);
+        const data =errorData.errors.errors.password;
+        
+        notify(data);
       }
     } catch (error) {
       console.error("Error register fetch", error);
@@ -125,6 +136,7 @@ export default function Signup() {
           {/* <Link to="/" style={{textDecoration:'none', color:'white'}}>Signup</Link> */}
           signup
           </button>
+          <ToastContainer />
         </form>
       </div>
 
