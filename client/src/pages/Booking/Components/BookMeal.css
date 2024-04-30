@@ -48,6 +48,7 @@
     padding: 10px;
     text-align: center;
     border-bottom: 1px solid #ccc;
+    cursor: pointer;
 }
 
 .calendar-day.empty {
@@ -95,6 +96,8 @@
     flex-direction: column;
 
 }
-.flex-space{
-    margin:2px;
+
+.flex-space {
+    margin: 2px;
+    cursor: pointer;
 }

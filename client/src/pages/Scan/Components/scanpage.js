@@ -21,7 +21,7 @@ const AttendancePage = () => {
             }
 
             const formattedDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
-            const response = await fetch('http://localhost:3001/api/attendance/mark-attendance', {
+            const response = await fetch('https://digital-mess.vercel.app/api/attendance/mark-attendance', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

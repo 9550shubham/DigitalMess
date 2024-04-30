@@ -7,6 +7,8 @@ const booking = async (req, res) => {
     try {
         const { classIds, rollnumber, bookingDate } = req.body;
 
+        let Mesg = '';
+
         if (!classIds || !Array.isArray(classIds) || classIds.length === 0 || !rollnumber || !bookingDate) {
             return res.status(400).json({ message: 'Invalid input' });
         }
@@ -20,10 +22,10 @@ const booking = async (req, res) => {
             const existingBooking = await Attendance.findOne({
                 class: classId,
                 student: rollnumber,
-                date: new Date(bookingDate)
-            });
+                bookingDate: new Date(bookingDate)
+            }).populate('class');
             if (existingBooking) {
-                console.log(`Seat already booked for meal ${classId}`);
+                Mesg = `Booking already exist! Please once verify `;
             } else {
                 const attendance = new Attendance({
                     class: classId,
@@ -32,18 +34,19 @@ const booking = async (req, res) => {
                     status: 'absent'
                 });
                 await attendance.save();
-                console.log(`Booking successful for meal ${classId}`);
+                Mesg = `Booked Successfully`;
             }
         });
 
         await Promise.all(attendancePromises);
 
-        res.status(201).json({ message: 'Booked successfully' });
+        res.status(201).json({ message: `${Mesg}` });
     } catch (error) {
         console.error('Error in booking:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
 
 const getBooking = async (req, res) => {
     try {

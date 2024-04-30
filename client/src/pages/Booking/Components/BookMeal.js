@@ -85,7 +85,7 @@ const Calendar = () => {
                 return;
             }
 
-            const response = await fetch('http://localhost:3001/api/main/book', {
+            const response = await fetch('https://digital-mess.vercel.app/api/main/book', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -126,10 +126,10 @@ const Calendar = () => {
                 </div>
             </div>
             {showRightBox && (
-                <div className="right-box" style={{marginTop:15}}>
+                <div className="right-box" style={{ marginTop: 15 }}>
                     <div className="right-box-header">
-                        <h5>{selectedDate ? selectedDate.toDateString() : ''}<button classNmae="ms-4" onClick={() => setShowRightBox(false)} style={{padding:1, borderRadius:10, marginLeft:50}}>  &#10004;</button></h5>
-                        
+                        <h5>{selectedDate ? selectedDate.toDateString() : ''}<button classNmae="ms-4" onClick={() => setShowRightBox(false)} style={{ paddingLeft: 1, paddingRight: 1, borderRadius: 50, border: 0, marginLeft: 50 }}>  X</button></h5>
+
                     </div>
                     <div className="right-box-content">
                         <label className='flex-space'>
@@ -159,7 +159,7 @@ const Calendar = () => {
                             />
                             Dinner
                         </label>
-                        <button onClick={handleSubmit} className="btn3" style={{marginTop:10, padding:1, borderRadius:10, marginLeft:75}}>Submit</button>
+                        <button onClick={handleSubmit} className="btn3" style={{ marginTop: 10, padding: 1, borderRadius: 10, marginLeft: 75 }}>Submit</button>
                     </div>
                 </div>
             )}
