@@ -77,7 +77,7 @@ const BillingPage = () => {
                             <div className="vertical-box mt-5">
                                 <div className="box shadow">
 
-                                    <div className="vertical-box">
+                                    <div className="vertical-box" style={{ backgroundColor: 'white' }}>
                                         <div className="heading1">Date: {currentDate}</div>
                                         <div className="flex-container">
                                             <div className="flex-item">Meal Name</div>

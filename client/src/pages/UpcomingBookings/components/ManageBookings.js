@@ -54,10 +54,10 @@ const Bookings = () => {
     tomorrow.setDate(tomorrow.getDate() + 1);
     return (
         <>
-            <div className="vertical-box mt-5">
+            <div className="vertical-box mt-5" >
                 <div className="box shadow">
 
-                    <div className="vertical-box">
+                    <div className="vertical-box" style={{ backgroundColor: 'white' }}>
                         <div className="heading1">Manage your Bookings</div>
 
                         {bookings.map((booking, index) => (
