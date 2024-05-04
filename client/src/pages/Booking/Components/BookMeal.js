@@ -84,8 +84,7 @@ const Calendar = () => {
                 authUtils.redirectToLogin();
                 return;
             }
-
-            const response = await fetch('https://digital-mess.vercel.app/api/main/book', {
+            const response = await fetch('https://digital-mess.vercel.app/api/main/book', { //https://digital-mess.vercel.app
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

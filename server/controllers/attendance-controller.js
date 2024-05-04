@@ -6,7 +6,12 @@ const markAttendance = async (req, res) => {
     try {
         const { classId, rollnumber, bookingDate } = req.body;
 
-        if (!classId || !rollnumber || bookingDate) {
+        const bookingDateOnly = bookingDate.split('T')[0]; // Extracts 'YYYY-MM-DD' part
+        const startDate = new Date(bookingDateOnly);
+        const endDate = new Date(new Date(bookingDateOnly).setDate(startDate.getDate() + 1));
+
+
+        if (!classId || !rollnumber || !bookingDate) {
             return res.status(400).json({ message: 'Class ID, Roll Number and Booking Date are required' });
         }
 
@@ -20,17 +25,22 @@ const markAttendance = async (req, res) => {
             return res.status(400).json({ message: 'Student is not enrolled in the specified class' });
         }
 
-        let attendance = await Attendance.findOne({ class: classId, student: rollnumber, bookingDate });
+        let attendance = await Attendance.findOne({
+            class: classId,
+            student: rollnumber,
+            bookingDate: {
+                $gte: startDate,
+                $lt: endDate,
+            }
+        });
 
         if (!attendance) {
-            res.status(400).json({ msg: 'booking not there for this meal' });
+            return res.status(400).json({ msg: 'booking not there for this meal' });
+        } else {
+            attendance.status = 'present';
+            await attendance.save();
+            res.json({ message: 'Attendance marked successfully' });
         }
-
-        attendance.status = 'present';
-        // attendance.date = Date.now();
-        await attendance.save();
-
-        res.json({ message: 'Attendance marked successfully' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

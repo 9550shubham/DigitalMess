@@ -20,13 +20,15 @@ const AttendancePage = () => {
                 return;
             }
 
-            const formattedDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
+            const currentDate = new Date(); // Get the current date
+            const isoDateString = currentDate.toISOString();
+
             const response = await fetch('https://digital-mess.vercel.app/api/attendance/mark-attendance', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ classId, rollnumber, bookingDate: formattedDate }),
+                body: JSON.stringify({ classId, rollnumber, bookingDate: isoDateString }),
             });
 
             if (!response.ok) {
